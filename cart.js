@@ -6,26 +6,37 @@ const cart = [
 
 function calculateTotal(cartItems) {
   let total = 0;
-  for (let i = 0; i <= cartItems.length; i++) { // Bug: <= should be <
-      total += cartItems[i].price; // Bug: cartItems[i] is undefined on the last iteration
+  // Removed the <= condition so that the cartItems object is not accessed with an invalid index.
+  for (let i = 0; i < cartItems.length; i++) { 
+      total += cartItems[i].price; 
   }
   return total;
 }
 
 function applyDiscount(total, discountRate) {
-  return total - total * discountRate; // Bug: Missing validation for discountRate
+  // Adding validation for the discountRate
+  if(discountRate > 0){
+    return total - total * discountRate; 
+  }
+  return ;
+  
 }
 
 function generateReceipt(cartItems, total) {
   let receipt = "Items:\n";
-  cartItems.forEach(item => {
-      receipt += `${item.name}: $${item.price}\n`;
-  });
-  receipt += `Total: $${total.toFixed(2)}`; // Bug: total may not be a number
+  // Added a isNaN check to validate if total is a number
+  if(!isNaN(total))
+    {
+    cartItems.forEach(item => {
+        receipt += `${item.name}: $${item.price}\n`;
+    });
+    receipt += `Total: $${total.toFixed(2)}`; 
+   }
   return receipt;
 }
 
 // Debugging entry point
+debugger;
 console.log("Starting shopping cart calculation...");
 const total = calculateTotal(cart);
 const discountedTotal = applyDiscount(total, 0.2); // 20% discount
