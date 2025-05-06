@@ -4,6 +4,13 @@ const cart = [
   { name: "Headphones", price: 200 }
 ];
 
+/**
+ * 
+ * using the developer tools in the browser, I set up a debugger in the JS file
+ * I was able to watch the program control flow, and find the mistakes in the code.
+ * I could see the typeerror in the browser console for invalid index to the cart object.
+ */
+
 function calculateTotal(cartItems) {
   let total = 0;
   // Removed the <= condition so that the cartItems object is not accessed with an invalid index.
